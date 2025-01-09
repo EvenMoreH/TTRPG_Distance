@@ -74,9 +74,28 @@ Div(
         cls="column",
     ),
     Div(
-        Input(name="placeholder - meters"),
-        Div("conversion placeholder"),
-        Div("conversion placeholder"),
+        Input(
+            id="meters",
+            name="meters",
+            type="text",
+            placeholder="Enter meters",
+            hx_post="/convert-m",
+            hx_trigger="input",
+            hx_include="#meters",
+            cls="input-field",
+        ),
+        Div(
+            id="results-mtf",
+            hx_swap_oob="true",
+            hx_swap="innerHTML",
+            cls="output",
+        ),
+        Div(
+            id="results-mth",
+            hx_swap_oob="true",
+            hx_swap="innerHTML",
+            cls="output",
+        ),
         cls="column",
 ),
     Div(
@@ -108,8 +127,7 @@ def homepage():
 def convert_ft(feet: str):
     try:
         feet_value = float(feet)
-        meters = feet_value * 0.3       # rounded to better utilize round method below
-        meters = round(meters * 2) / 2  # result will always be either .0 or .5
+        meters = feet_value * 0.300003  # rounded to better utilize round method below
         hexes = feet_value / 5          # 1 hex/sq = 1 inch which is 5 ft
         return Div(
             f"Meters: {meters:.1f}",
@@ -134,6 +152,40 @@ def convert_ft(feet: str):
         ), Div(
             "Invalid input. Please enter a numeric value.",
             id="results-fth",
+            hx_swap_oob="true",
+            hx_swap="innerHTML",
+            cls="output",
+        )
+
+@rt("/convert-m")
+def convert_m(meters: str):
+    try:
+        meters_value = float(meters)
+        feet = meters_value * 3.33333   # rounded to better utilize round method below
+        hexes = meters_value / 1.5      # 1 hex/sq = 1 inch which is 5 ft
+        return Div(
+            f"Feet: {feet:.1f}",
+            id="results-mtf",
+            hx_swap_oob="true",
+            hx_swap="innerHTML",
+            cls="output",
+        ), Div(
+            f"Hexes: {hexes:.1f}",
+            id="results-mth",
+            hx_swap_oob="true",
+            hx_swap="innerHTML",
+            cls="output",
+        )
+    except ValueError:
+        return Div(
+        "Invalid input. Please enter a numeric value.",
+        id="results-mtf",
+        hx_swap_oob="true",
+        hx_swap="innerHTML",
+        cls="output",
+        ), Div(
+            "Invalid input. Please enter a numeric value.",
+            id="results-mth",
             hx_swap_oob="true",
             hx_swap="innerHTML",
             cls="output",
