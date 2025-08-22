@@ -1,10 +1,10 @@
 from fasthtml.common import * # type: ignore
 
 # for docker
-# app, rt = fast_app(static_path="static") # type: ignore
+app, rt = fast_app(static_path="static") # type: ignore
 
 # for local
-app, rt = fast_app(static_path="app/static") # type: ignore
+# app, rt = fast_app(static_path="app/static") # type: ignore
 
 class Global_clean_string:
     """A utility class to clean strings globally.
