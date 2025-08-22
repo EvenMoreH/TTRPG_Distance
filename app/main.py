@@ -153,7 +153,9 @@ def convert_hex(hex: str):
         )
     except ValueError:
         err = Div("Enter a number.", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
-        return err, err
+        err_htf = Div("Enter a number.", id="results-htf", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        err_htm = Div("Enter a number.", id="results-htm", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        return err_htf, err_htm
 
 
 if __name__ == '__main__':
