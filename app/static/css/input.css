@@ -76,7 +76,7 @@
   }
 
   /* Card
-     title */
+  /* Card title */
   .card-title {
     @apply text-xl;
     @apply font-semibold;
