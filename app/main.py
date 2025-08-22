@@ -113,7 +113,9 @@ def convert_ft(feet: str):
         )
     except ValueError:
         err = Div("Enter a number.", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
-        return err, err
+        err_ftm = Div("Enter a number.", id="results-ftm", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        err_fth = Div("Enter a number.", id="results-fth", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        return err_ftm, err_fth
 
 @rt("/convert-m")
 def convert_m(meters: str):
