@@ -70,7 +70,7 @@
   }
 
   /* Individual
-     conversion card */
+  /* Individual conversion card */
   .card {
   @apply bg-neutral-800 p-4 rounded-lg shadow-md;
   }
