@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Apply dark background to entire page */
+@layer base {
+  body {
+    @apply bg-zinc-900;
+  }
+}
+
+/* Light theme media overrides */
+@media (prefers-color-scheme: light) {
+  /* light background for page */
+  body {
+    @apply bg-neutral-50 text-neutral-900;
+  }
+  /* container light theme */
+  .container {
+    @apply bg-neutral-50 text-neutral-900;
+  }
+  /* card light theme */
+  .card {
+    @apply bg-white text-neutral-900;
+  }
+  /* input-field light theme */
+  .input-field {
+    @apply bg-white text-neutral-900 border-neutral-300 focus:ring-neutral-500;
+  }
+  /* output light theme */
+  .output {
+    @apply text-neutral-900;
+  }
+  /* error light theme */
+  .error {
+    @apply text-red-600;
+  }
+  /* button light theme */
+  .btn {
+    @apply bg-lime-700 hover:bg-lime-600 text-white;
+  }
+}
+
+@layer components {
+  /* Container for the entire form */
+  .container {
+    /* push down form by 20vh only on medium screens and larger */
+  @apply md:mt-[20vh];
+  /* Alternative syntax splitting if too long: */
+  /* @apply md:mt-[20vh]; */
+    @apply max-w-[48rem] mx-auto p-6 bg-zinc-900 text-neutral-50 rounded-lg shadow-xl;
+  }
+
+  /* Header with title and reset button */
+  .header {
+    @apply flex justify-between items-center mb-6;
+  }
+
+  /* Main title */
+  .title {
+    @apply text-4xl font-bold;
+  }
+
+  /* Reset button */
+  .btn {
+    @apply bg-lime-600 hover:bg-lime-500 text-neutral-900 font-bold px-4 py-2 rounded;
+  }
+
+  /* Grid layout for conversion cards */
+  .grid-layout {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  /* Individual
+  /* Individual conversion card */
+  .card {
+  @apply bg-neutral-800 p-4 rounded-lg shadow-md;
+  }
+
+  /* Card
+  /* Card title */
+  .card-title {
+    @apply text-xl;
+    @apply font-semibold;
+    @apply mb-2;
+  }
+
+  /* Input field styling */
+  .input-field {
+  @apply w-full bg-stone-700 text-neutral-50 p-2 rounded border border-stone-600 focus:outline-none focus:ring-2 focus:ring-lime-500;
+  }
+
+  /* Output text styling */
+  .output {
+  @apply mt-2 text-neutral-200;
+  }
+
+  /* Error text styling */
+  .error {
+    @apply mt-2 text-red-400;
+  }
+}
