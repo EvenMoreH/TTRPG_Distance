@@ -37,7 +37,7 @@ distance_form = Div(
         Div(
             H3("Feet", cls="card-title"),
             Input(
-                id="feet", name="feet", type="text",
+                id="feet", name="feet", type="number",
                 hx_post="/convert-ft", hx_trigger="input",
                 hx_include="#feet", cls="input-field"
             ),
@@ -48,7 +48,7 @@ distance_form = Div(
         Div(
             H3("Meters", cls="card-title"),
             Input(
-                id="meters", name="meters", type="text",
+                id="meters", name="meters", type="number",
                 hx_post="/convert-m", hx_trigger="input",
                 hx_include="#meters", cls="input-field"
             ),
@@ -59,7 +59,7 @@ distance_form = Div(
         Div(
             H3("Hex", cls="card-title"),
             Input(
-                id="hex", name="hex", type="text",
+                id="hex", name="hex", type="number",
                 hx_post="/convert-hex", hx_trigger="input",
                 hx_include="#hex", cls="input-field"
             ),
@@ -90,6 +90,7 @@ def homepage():
                 "document.getElementById('reset-btn').addEventListener('click', () => {"
                 " document.querySelectorAll('.input-field').forEach(i => i.value = '');"
                 " document.querySelectorAll('.output').forEach(o => o.innerHTML = '');"
+                " document.querySelectorAll('.error').forEach(e => { e.innerHTML = ''; e.classList.remove('error'); e.classList.add('output'); });"
                 " });"
             )
         )
@@ -112,9 +113,8 @@ def convert_ft(feet: str):
             Div(f"{hexes:.1f} hexes", id="results-fth", hx_swap_oob="true", hx_swap="innerHTML", cls="output")
         )
     except ValueError:
-        err = Div("Enter a number.", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
         err_ftm = Div("Enter a number.", id="results-ftm", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
-        err_fth = Div("Enter a number.", id="results-fth", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        err_fth = Div("", id="results-fth", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
         return err_ftm, err_fth
 
 @rt("/convert-m")
@@ -134,9 +134,8 @@ def convert_m(meters: str):
             Div(f"{hexes:.1f} hexes", id="results-mth", hx_swap_oob="true", hx_swap="innerHTML", cls="output")
         )
     except ValueError:
-        err = Div("Enter a number.", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
         err_mtf = Div("Enter a number.", id="results-mtf", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
-        err_mth = Div("Enter a number.", id="results-mth", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        err_mth = Div("", id="results-mth", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
         return err_mtf, err_mth
 
 @rt("/convert-hex")
@@ -156,9 +155,8 @@ def convert_hex(hex: str):
             Div(f"{meters:.1f} meters", id="results-htm", hx_swap_oob="true", hx_swap="innerHTML", cls="output")
         )
     except ValueError:
-        err = Div("Enter a number.", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
         err_htf = Div("Enter a number.", id="results-htf", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
-        err_htm = Div("Enter a number.", id="results-htm", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        err_htm = Div("", id="results-htm", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
         return err_htf, err_htm
 
 
