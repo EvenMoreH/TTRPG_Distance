@@ -133,7 +133,9 @@ def convert_m(meters: str):
         )
     except ValueError:
         err = Div("Enter a number.", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
-        return err, err
+        err_mtf = Div("Enter a number.", id="results-mtf", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        err_mth = Div("Enter a number.", id="results-mth", hx_swap_oob="true", hx_swap="innerHTML", cls="error")
+        return err_mtf, err_mth
 
 @rt("/convert-hex")
 def convert_hex(hex: str):
