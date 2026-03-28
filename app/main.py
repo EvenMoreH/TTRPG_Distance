@@ -1,3 +1,4 @@
+import os
 from fasthtml.common import (
     Body,
     Button,
@@ -52,6 +53,21 @@ def format_decimal(value: float) -> str:
     """Format conversion values with one decimal place."""
 
     return f"{value:.1f}"
+
+
+def get_server_port(default_port: int = 5017) -> int:
+    """Read and validate the port from PORT environment variable."""
+
+    raw_port = os.getenv("PORT", str(default_port))
+    try:
+        parsed_port = int(raw_port)
+    except ValueError:
+        return default_port
+
+    if 1 <= parsed_port <= 65535:
+        return parsed_port
+
+    return default_port
 
 
 def build_conversion_rows(value: int) -> list[ConversionRow]:
@@ -156,4 +172,4 @@ def convert(distance_value: str) -> Div:
 
 
 if __name__ == '__main__':
-    serve(host='0.0.0.0', port=5017)
+    serve(host='0.0.0.0', port=get_server_port())

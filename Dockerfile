@@ -10,6 +10,10 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Optional build-time default port for the app
+ARG APP_PORT=5017
+ENV PORT=${APP_PORT}
+
 # Copy the rest of the application
 COPY app/ app/
 
